@@ -1,8 +1,8 @@
 # AndroidMainServer
-- 본 텍스트는 개발 내역의 이해를 돕기 위한 파일입니다
+- 본 텍스트는 개발 내역의 이해를 돕기 위한 글입니다
 - 개발 일지 (AndroidServer Development Diary)
-- 개발 내용
-- 개발 기간
+- 개발 내용 (Update Content)
+- 개발 기간 (Term of Development)
 ## AndroidServer Development Diary
 ### 21-06-07 commit
   
