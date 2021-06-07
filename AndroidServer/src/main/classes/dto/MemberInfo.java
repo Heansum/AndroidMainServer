@@ -16,6 +16,7 @@ public class MemberInfo {
 	public MemberInfo(HttpServletRequest request) throws EmptyMemberInfoException, OverflowMemberInfoException {
 		this.id = request.getParameter("id");
 		this.pw = request.getParameter("pw");
+		this.email = request.getParameter("email");
 		
 		if(id == null || pw == null) {
 			// 아이디 또는 비밀번호가 전달되지 않았다면은

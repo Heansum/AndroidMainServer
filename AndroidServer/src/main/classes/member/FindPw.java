@@ -18,14 +18,14 @@ import exception.OverflowMemberInfoException;
 /**
  * Servlet implementation class Find
  */
-@WebServlet("/member/findid")
-public class FindId extends HttpServlet {
+@WebServlet("/member/findpw")
+public class FindPw extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindId() {
+    public FindPw() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +35,17 @@ public class FindId extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			MemberInfo memberFindIdInfo = new MemberInfo(request);
+			MemberInfo memberFindPwInfo = new MemberInfo(request);
 			
 			MemberService ms = new MemberService();
-			boolean isfindId = ms.findId(memberFindIdInfo);
+			boolean isfindPw = ms.findPw(memberFindPwInfo);
 
-			if(isfindId) {
-				// 아이디 찾기가 성공적으로 됬다면
-				// 아이디를 보여준다
+			if(isfindPw) {
+				// 비밀번호 찾기가 성공적으로 됬다면
+				// 비밀번호를 보여준다
 				response.setStatus(201);
 			} else {
-				// 아이디 찾기가 되지 않았다면(이메일을 잘못 침)
+				// 비밀번호 찾기가 되지 않았다면(아이디나 이메일을 잘못입력한 것)
 				response.setStatus(400);
 			}
 		} catch(EmptyMemberInfoException | OverflowMemberInfoException e) {
