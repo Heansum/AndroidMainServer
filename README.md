@@ -1,6 +1,6 @@
 # AndroidMainServer
 - 본 텍스트는 개발 내역의 이해를 돕기 위한 파일입니다
-- 개발 일지
+- 개발 일지 (AndroidServer Development Diary)
 - 개발 내용
 - 개발 기간
 ## AndroidServer Development Diary
