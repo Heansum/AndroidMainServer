@@ -35,14 +35,15 @@ public class FindId extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			MemberInfo memberFindIdInfo = new MemberInfo(request);
+			MemberInfo memberFindIdInfo = new MemberInfo(request,email);//email을 매개변수로 추가시켜줘서 쿼리로 보내줄 email값을 받아옴
 			
 			MemberService ms = new MemberService();
-			boolean isfindId = ms.findId(memberFindIdInfo);
+			String isfindId = ms.findId(memberFindIdInfo);//수정된 memberFindIdInfo는 String값을 반환함
 
-			if(isfindId) {
+			if(isfindId == null) {
 				// 아이디 찾기가 성공적으로 됬다면
 				// 아이디를 보여준다
+				// 여기에 우리가 찾은 회원의 아이디를 안드로이드 스튜디오에 보낼 메서드를 찾아야함
 				response.setStatus(201);
 			} else {
 				// 아이디 찾기가 되지 않았다면(이메일을 잘못 침)
@@ -53,6 +54,8 @@ public class FindId extends HttpServlet {
 		} catch(SQLException e) {
 			// 서버 문제
 			response.setStatus(500);
+		}catch(NotFoundMemberInfoException  e){
+			response.setStatus(404);
 		}
 	}
 	
