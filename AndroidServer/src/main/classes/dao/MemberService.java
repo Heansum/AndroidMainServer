@@ -113,8 +113,8 @@ public class MemberService {
 	}
 	
 	// 아이디 찾기 메서드
-	public boolean findId(MemberInfo memberFindIdInfo) throws SQLException {
-		boolean isFindId = false;
+	public String findId(MemberInfo memberFindIdInfo) throws SQLException, NotFoundMemberInfoException {
+		
 		
 		Connection conn = DBMng.getConnection();
 		
@@ -124,20 +124,20 @@ public class MemberService {
 		
 		ResultSet rs = pstmt.executeQuery();
 		
-		isFindId = rs.next();
 		
-		if(isFindId) {
-			// Id를 찾으면
-			String userId = rs.getString(2);
-			// Id값을 반환
+		
+		if(rs.next()) {//rs.next는 true false값 반환
+			// Id를 찾으면 Id값을 반환
+			String userId = rs.getString("id");
+			
 			System.out.println(userId);
 		} else {
-			System.out.println("아이디를 찾지 못했습니다");
+			throw new NotFoundMemberInfoException("회원 정보가 없습니다. ");
 		}
 		
 		DBMng.closeConnection();
 		
-		return isFindId;
+		return userId;
 	}
 	
 	// Id를 주는 메서드 -> Id 찾기
@@ -173,8 +173,8 @@ public class MemberService {
 	*/
 	
 	// 비밀번호 찾기 메서드
-	public boolean findPw(MemberInfo memberFindPwInfo) throws SQLException {
-		boolean isFindPw = false;
+	public String findPw(MemberInfo memberFindPwInfo) throws SQLException ,NotFoundMemberInfoException {
+		
 		
 		Connection conn = DBMng.getConnection();
 		
@@ -184,20 +184,20 @@ public class MemberService {
 		
 		ResultSet rs = pstmt.executeQuery();
 		
-		isFindPw = rs.next();
 		
-		if(isFindPw) {
-			// Pw를 찾으면
-			String userPw = rs.getString(3);
-			// Pw값을 반환
+		
+		if(rs.next()) {
+			// Pw를 찾으면Pw값을 반환
+			String userPw = rs.getString("pw");
+			// 
 			System.out.println(userPw);
 		} else {
-			System.out.println("비밀번호를 찾지 못했습니다, 입력한 이메일과 아이디를 확인하세요");
+			throw new NotFoundMemberInfoException("회원 정보가 없습니다.");
 		}
 		
 		DBMng.closeConnection();
 		
-		return isFindPw;
+		return userPw;
 	}
 		
 	public int selectByIdPw(String id, String pw, String email) {
