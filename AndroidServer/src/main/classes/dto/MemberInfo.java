@@ -36,10 +36,21 @@ public class MemberInfo {
 		this.joinDate = joinDate.toString();
 	}
 	
-	public MemberInfo(HttpServletRequest request, MemberInfo email) throws EmptyMemberInfoException, OverflowMemberInfoException {
+	public MemberInfo(HttpServletRequest request, Stirng email) throws EmptyMemberInfoException, OverflowMemberInfoException {
 		this(request);
 		
 		this.email = request.getParameter("email");
+		
+		if(email == null ) {
+			// 아이디 또는 비밀번호가 전달되지 않았다면은
+			throw new EmptyMemberInfoException("이메일이 전달되지 않았습니다.");
+		} else if(email.length() > 20 ) {
+			// 이메일이 20자를(일정 길이이상을)초과했다면
+			throw new OverflowMemberInfoException("이메일이 지정한 길이를 초과했습니다.");
+		} else if(email.trim().length() == 0 ) {
+			// 아이디 또는 비밀번호가 공백으로만 전달됬다면
+			throw new EmptyMemberInfoException("이메일이 전달되지 않았습니다.");
+		}
 	}
 	
 	public MemberInfo(String id, String pw, String email) {
